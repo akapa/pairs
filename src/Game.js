@@ -6,6 +6,7 @@ export default class Game {
 		this.deckSize = deckSize;
 		this.availableCards = availableCards;
 		this.cards = [];
+		this.tries = 0;
 	}
 
 	start() {
@@ -27,7 +28,6 @@ export default class Game {
 
 		const good = values[0] === values[1];
 		if (good) this.cards = this.cards.filter(elem => elem !== values[0]);
-		console.log(this.cards);
 
 		if(this.isReady()) this.end();
 
@@ -41,6 +41,10 @@ export default class Game {
 
 	isReady() {
 		return this.cards.length === 0;
+	}
+
+	restart() {
+		this.start();
 	}
 
 	end() {

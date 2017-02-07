@@ -11,6 +11,7 @@ export default class GameScene {
 		$(this.game)
 			.on('generated', () => {
 				this.$elem.removeClass('hidden');
+				this.detachDomHandlers();
 				this.attachDomHandlers();
 				this.displayCards();
 			})
@@ -24,10 +25,11 @@ export default class GameScene {
 	}
 
 	destroy() {
+		$(this.game).off();
 		this.game = null;
+
 		this.detachDomHandlers();
 		this.$elem.addClass('hidden');
-		$(this.game).off();
 	}
 
 	handleChoice($card) {
@@ -79,5 +81,6 @@ export default class GameScene {
 	detachDomHandlers() {
 		this.$elem.off();
 		this.$elem.find('.quit').off();
+		this.$elem.find('.restart').off();
 	}
 }
