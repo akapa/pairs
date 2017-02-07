@@ -1,4 +1,4 @@
-# Media list
+# Pairs Game
 
 ## Installation
 
