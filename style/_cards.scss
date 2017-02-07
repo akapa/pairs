@@ -1,0 +1,52 @@
+.cards {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+
+	list-style: none;
+	padding: 0;
+	perspective: 1000px;
+
+	li {
+		flex: 0 0 3rem;
+		margin: 1rem;
+		position: relative;
+		transform: none;
+		transform-style: preserve-3d;
+		backface-visibility: hidden;
+		opacity: 1;
+		transition: 0.3s transform ease, 0.3s opacity ease;
+		border-radius: 10px;
+		
+		&.shown {
+			transform: rotateY(180deg);
+		}
+
+		&.removed {
+			transform: rotateY(180deg) translateX(100%) scale(0.5);
+			pointer-events: none;
+			opacity: 0;
+		}
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: $primaryColor;
+			border: 1px solid black;
+		}
+
+		&:after {
+			transform: rotateY(180deg);
+		}
+
+		img {
+			position: relative;
+			z-index: 1;
+			transform: scale(0.8) rotateY(180deg);
+		}
+	}
+}

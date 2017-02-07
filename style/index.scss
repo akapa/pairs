@@ -3,6 +3,9 @@
 @import 'settings';
 @import 'fonts';
 
+@import 'forms';
+@import 'cards';
+
 * {
 	box-sizing: border-box;
 }
@@ -11,8 +14,29 @@ body {
 	margin: 0;
 	background-color: $bodyBgColor;
 	font-family: $textFont;
+	font-size: 1.4rem;
 }
 
-button {
-	font-family: $textFont;
+.settings {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.game {
+	opacity: 1;
+	position: relative;
+	background-color: $bodyBgColor;
+	height: 100vh;
+	overflow: auto;
+
+	&.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.toolbar {
+	@extend form;
 }
