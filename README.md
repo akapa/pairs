@@ -14,12 +14,6 @@ npm run start
 
 ## Development
 
-### Unit tests
-
-```bash
-npm run test
-```
-
 ### Watch to build
 
 Watches Javascript code to transpile with Babel and SASS to generate CSS.
