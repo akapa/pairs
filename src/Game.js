@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import shuffle from './shuffler';
 
 export default class Game {
 	constructor(elem, availableCards, deckSize = 6) {
@@ -9,31 +10,57 @@ export default class Game {
 	}
 
 	start() {
+		this.tries = 0;
+		this.updateScore();
+
 		this.cards = this.generateCards();
 		this.displayCards();
+
+		this.$elem.removeClass('hidden');
+		this.attachHandlers();
+	}
+
+	attachHandlers() {
 		this.$elem.on('click', 'li', (e) => {
 			this.handleChoice($(e.currentTarget));
 		});
+		this.$elem.find('.restart').on('click', () => {
+			this.end();
+			this.start();
+		});
+		this.$elem.find('.quit').on('click', this.end.bind(this));
+	}
+
+	detachHandlers() {
+		this.$elem.off();
+		this.$elem.find('.quit').off();
 	}
 
 	generateCards() {
-		this.shuffle(this.availableCards);
+		shuffle(this.availableCards);
 		const cards = this.availableCards.slice(0, this.deckSize / 2);
-		return this.shuffle(cards.concat(cards));
+		return shuffle(cards.concat(cards));
 	}
 
 	handleChoice($card) {
-		$card.addClass('shown temporarily');
-		const $temps = this.$elem.find('.temporarily');
-		if ($temps.length > 1) {
-			$temps.removeClass('temporarily');
+		$card.addClass('shown');
+		const $temps = this.$elem.find('.shown');
+		setTimeout(this.doChecks.bind(this, $temps), 500);
+	}
 
-			const tempValues = $temps.map((i, card) => $(card).data('type')).get();
-			if (tempValues[0] !== tempValues[1]) {
-				$temps.removeClass('shown');
-			}
+	doChecks($temps) {
+		if ($temps.length <= 1) return;
+
+		this.tries += 1;
+		this.updateScore();
+
+		$temps.removeClass('shown');
+
+		const tempValues = $temps.map((i, card) => $(card).data('type')).get();
+		if (tempValues[0] === tempValues[1]) {
+			$temps.addClass('removed');
 		}
-		
+
 		if(this.isReady()) this.end();
 	}
 
@@ -50,17 +77,17 @@ export default class Game {
 		this.$list.append($lis);
 	}
 
+	updateScore() {
+		this.$elem.find('.tries').text(this.tries);
+	}
+
 	isReady() {
-		const $stillHidden = this.$list.find('li:not(.shown)');
+		const $stillHidden = this.$list.find('li:not(.removed)');
 		return $stillHidden.length === 0;
 	}
 
-	shuffle(arr) {
-		return arr.sort(() => Math.round(Math.random()));
-	}
-
 	end() {
-		this.$elem.off();
-		console.log('game has ended');
+		this.detachHandlers();
+		this.$elem.addClass('hidden');
 	}
 }

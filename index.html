@@ -12,7 +12,12 @@
 				<label>Deck size <input class="deck-size" type="number" value="6" min="6" max="20" required></label>
 				<button type="submit">Lets do this</button>
 			</form>
-			<div class="game">
+			<div class="game hidden">
+				<div class="toolbar">
+					<span><span class="tries">0</span> tries so far</span>
+					<button class="restart">Start over</button>
+					<button class="quit">Quit</button>
+				</div>
 				<ol class="cards"></ol>
 			</div>
 		</div>

@@ -12,7 +12,5 @@ export default function main() {
 
 		game = new Game($game, cards, $this.find('.deck-size').val());
 		game.start();
-
-		$this.addClass('hidden');
 	});
 }
