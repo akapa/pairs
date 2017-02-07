@@ -1,0 +1,17 @@
+$primaryColor: #042f40;
+$secondaryColor: #fef858;
+$bodyBgColor: #9bff69;
+$errorColor: #ba1a34;
+
+$spacing: 1.5rem;
+$half-spacing: $spacing / 2;
+
+$textFont: sans-serif;
+
+$breakpoints: (
+	phone: 320px,
+	tablet: 768px,
+	laptop: 1024px,
+	desktop: 1200px,
+	huge: 1600px
+);

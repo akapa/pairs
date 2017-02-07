@@ -1,0 +1,22 @@
+{
+	"extends": [
+		"airbnb-base",
+		"plugin:jasmine/recommended"
+	],
+	"plugins": [
+		"import",
+		"jasmine"
+	],
+	"env": {
+		"browser": true,
+		"jasmine": true
+	},
+	"rules": {
+		"indent": [2, "tab"],
+		"no-tabs": 0,
+		"no-new": 0,
+		"prefer-template": 0,
+		"comma-dangle": ["error", "never"],
+		"class-methods-use-this": 0
+	}
+}

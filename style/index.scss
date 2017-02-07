@@ -1,0 +1,13 @@
+@import '../node_modules/include-media/dist/_include-media.scss';
+
+@import 'settings';
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background-color: $bodyBgColor;
+	font-family: $textFont;
+}
